@@ -4,9 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 
-class MyRecyclerViewAdapter(val fruitsList: List<Fruit>) : RecyclerView.Adapter<MyViewHolder>(){
+class MyRecyclerViewAdapter(
+    private val fruitsList: List<Fruit>,
+    private val clickListener: (Fruit)-> Unit
+) : RecyclerView.Adapter<MyViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -30,5 +34,9 @@ class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view){
     fun bindData(fruit: Fruit){
         val viewName = view.findViewById<TextView>(R.id.tvName)
         viewName.text = fruit.name
+
+        view.setOnClickListener {
+            Toast.makeText(view.context, "Selected fruit is: ${fruit.name}", Toast.LENGTH_LONG).show()
+        }
     }
 }

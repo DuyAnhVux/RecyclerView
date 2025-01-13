@@ -25,18 +25,19 @@ class MyRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val fruit = fruitsList[position]
-        holder.bindData(fruit)
+        holder.bindData(fruit, clickListener)
     }
 
 }
 
 class MyViewHolder(val view: View) : RecyclerView.ViewHolder(view){
-    fun bindData(fruit: Fruit){
+    fun bindData(fruit: Fruit, clickListener: (Fruit)-> Unit){
         val viewName = view.findViewById<TextView>(R.id.tvName)
         viewName.text = fruit.name
 
         view.setOnClickListener {
-            Toast.makeText(view.context, "Selected fruit is: ${fruit.name}", Toast.LENGTH_LONG).show()
+            clickListener(fruit)
+//            Toast.makeText(view.context, "Selected fruit is: ${fruit.name}", Toast.LENGTH_LONG).show()
         }
     }
 }

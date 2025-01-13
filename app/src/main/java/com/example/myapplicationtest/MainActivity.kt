@@ -23,7 +23,11 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.rv)
         recyclerView.setBackgroundColor(Color.YELLOW)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = MyRecyclerViewAdapter(fruitsList, {selectedItem: Fruit-> listItemClicked(selectedItem)})
+        recyclerView.adapter = MyRecyclerViewAdapter(
+            fruitsList
+        ) { selectedItem: Fruit ->
+            listItemClicked(selectedItem)
+        }
     }
 
     private fun listItemClicked(fruit: Fruit){
